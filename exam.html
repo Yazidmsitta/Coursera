@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie de Photos Interactive</title>
+    <style>
+        .gallery {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+            transition: border 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Galerie de Photos Interactive</h1>
+    <div class="gallery">
+        <img src="medicine1.jpg" alt="Description de l'image 1">
+        <img src="medicine2.jpg" alt="Description de l'image 2">
+        <img src="medicine3.jpg" alt="Description de l'image 3">
+        <img src="medicine4.jpg" alt="Description de l'image 4">
+        <img src="medicine5.jpg" alt="Description de l'image 5">
+        <img src="medicine6.jpg" alt="Description de l'image 6">
+    </div>
+
+    <script>
+        // Fonction pour initialiser la galerie
+        function initializeGallery() {
+            console.log("Galerie de photos chargée.");
+            addTabFocus();
+            addEventListeners();
+        }
+
+        // Fonction pour ajouter les attributs tabindex à chaque image
+        function addTabFocus() {
+            const images = document.querySelectorAll('.gallery img');
+            images.forEach((img, index) => {
+                img.setAttribute('tabindex', '0');
+            });
+        }
+
+        // Fonction pour ajouter des écouteurs d'événements
+        function addEventListeners() {
+            const images = document.querySelectorAll('.gallery img');
+            images.forEach((img, index) => {
+                img.addEventListener('mouseover', () => {
+                    img.style.border = "2px solid blue";
+                });
+                img.addEventListener('mouseleave', () => {
+                    img.style.border = "";
+                });
+                img.addEventListener('focus', () => {
+                    img.style.border = "2px solid green";
+                    console.log(`L'image ${index + 1} est en focus.`);
+                });
+                img.addEventListener('blur', () => {
+                    img.style.border = "";
+                    console.log(`L'image ${index + 1} a perdu le focus.`);
+                });
+            });
+        }
+
+        // Charger les fonctions une fois la page chargée
+        window.onload = initializeGallery;
+    </script>
+
+</body>
+</html>
